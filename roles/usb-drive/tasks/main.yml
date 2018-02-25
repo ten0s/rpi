@@ -1,0 +1,23 @@
+---
+- name: Install NTFS driver
+  apt: name=ntfs-3g
+       state=present
+
+- name: Create mount point
+  file: path=/media/Transcend
+        state=directory
+
+- name: Provision /etc/fstab
+  lineinfile:
+    path: /etc/fstab
+    line: "UUID=620090FE0090DA7D /media/Transcend ntfs-3g auto,nofail,nobootwait,uid=1000,gid=1000,fmask=0111,dmask=0000,utf8,windows_names 0 0"
+  notify: Remount Transcend
+
+- name: Disable LXDE automount
+  blockinfile:
+    path: /home/pi/.config/pcmanfm/LXDE/pcmanfm.conf
+    block: |
+      [volume]
+        mount_on_startup=0
+        mount_removable=0
+        autorun=0

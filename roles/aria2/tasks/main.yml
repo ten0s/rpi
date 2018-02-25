@@ -28,3 +28,7 @@
   service: name=aria2
            enabled=true
            state=started
+
+- name: Create Downloads dir
+  file: path=/media/Transcend/Downloads
+        state=directory
