@@ -3,6 +3,10 @@
   apt: name=aria2
        state=present
 
+- name: Create Downloads dir
+  file: path=/media/Transcend/Downloads
+        state=directory
+
 - name: Provision config (1/2)
   file: path=/etc/aria2/
         state=directory
@@ -13,7 +17,7 @@
 
 - name: Clone WebUI
   git: repo=https://github.com/ziahamza/webui-aria2.git
-       dest=/var/www/webui-aria2
+       dest=/var/www/aria2
 
 - name: Provision nginx
   copy: src=webui-aria2.conf
@@ -28,7 +32,3 @@
   service: name=aria2
            enabled=true
            state=started
-
-- name: Create Downloads dir
-  file: path=/media/Transcend/Downloads
-        state=directory
