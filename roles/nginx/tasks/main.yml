@@ -1,0 +1,29 @@
+---
+- name: Install Nginx
+  apt: name=nginx
+       state=present
+
+- name: Provision config (1/3)
+  file: path=/etc/nginx/conf.d/server.d
+        state=directory
+
+- name: Provision config (2/3)
+  file: path=/etc/nginx/{{item}}
+         state=absent
+  with_items:
+  - sites-available/default
+  - sites-enabled/default
+  notify: Restart Nginx
+
+- name: Provision config (3/3)
+  copy: src={{item.src}}
+        dest={{item.dest}}
+  with_items:
+  - {src: server.conf, dest: /etc/nginx/conf.d/}
+  - {src: server.d/default.conf, dest: /etc/nginx/conf.d/server.d/}
+  notify: Restart Nginx
+
+- name: Enable service
+  service: name=nginx
+           enabled=true
+           state=started

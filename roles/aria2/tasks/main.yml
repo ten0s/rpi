@@ -1,0 +1,30 @@
+---
+- name: Install Aria2
+  apt: name=aria2
+       state=present
+
+- name: Provision config (1/2)
+  file: path=/etc/aria2/
+        state=directory
+
+- name: Provision config (2/2)
+  copy: src=aria2.conf
+        dest=/etc/aria2/
+
+- name: Clone WebUI
+  git: repo=https://github.com/ziahamza/webui-aria2.git
+       dest=/var/www/webui-aria2
+
+- name: Provision nginx
+  copy: src=webui-aria2.conf
+        dest=/etc/nginx/conf.d/server.d/
+  notify: Restart Nginx
+
+- name: Enable service (1/2)
+  copy: src=aria2.service
+        dest=/lib/systemd/system/
+
+- name: Enable service (2/2)
+  service: name=aria2
+           enabled=true
+           state=started

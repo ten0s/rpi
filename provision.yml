@@ -1,0 +1,7 @@
+---
+- name: Provision RPi env
+  hosts: all
+  become: true
+  roles:
+  - {role: aria2, tags: ["aria2"]}
+  - {role: nginx, tags: ["nginx"]}
