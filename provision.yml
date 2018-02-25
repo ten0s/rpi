@@ -5,4 +5,5 @@
   roles:
   - {role: aria2, tags: ["aria2"]}
   - {role: nginx, tags: ["nginx"]}
+  - {role: transmission, tags: ["transmission"]}
   - {role: usb-drive, tags: ["usb-drive"]}

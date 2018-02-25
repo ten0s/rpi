@@ -3,7 +3,7 @@
   apt: name=aria2
        state=present
 
-- name: Create Downloads dir
+- name: Ensure dir
   file: path=/media/Transcend/Downloads
         state=directory
 

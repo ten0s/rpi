@@ -1,0 +1,26 @@
+---
+- name: Install Transmission
+  apt: name=transmission-daemon
+       state=present
+
+- name: Ensure dirs
+  file: path=/media/Transcend/Downloads
+        state=directory
+  with_items:
+  - /media/Transcend/Downloads
+  - /media/Transcend/tmp
+
+- name: Provision config
+  copy: src=settings.json
+        dest=/etc/transmission-daemon/
+  notify: Reload Transmission
+
+- name: Provision nginx
+  copy: src=webui.conf
+        dest=/etc/nginx/conf.d/server.d/transmission.conf
+  notify: Restart Nginx
+
+- name: Enable service
+  service: name=transmission-daemon
+           enabled=true
+           state=started
