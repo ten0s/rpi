@@ -7,13 +7,10 @@
   file: path=/media/Transcend/Downloads
         state=directory
 
-- name: Provision config (1/2)
-  file: path=/etc/aria2/
-        state=directory
-
-- name: Provision config (2/2)
+- name: Provision config
   copy: src=aria2.conf
         dest=/etc/aria2/
+  notify: Restart Aria2
 
 - name: Clone WebUI
   git: repo=https://github.com/ziahamza/webui-aria2.git

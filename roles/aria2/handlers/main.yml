@@ -1,0 +1,3 @@
+---
+- name: Restart Aria2
+  service: name=aria2 state=restarted
