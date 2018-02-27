@@ -16,6 +16,7 @@
 - name: Provision Samba config
   blockinfile:
     path: /etc/samba/smb.conf
+    marker: "# {mark} ANSIBLE MANAGED BLOCK (USB-DRIVE)"
     block: |
       [Transcend]
         comment = Transcend USB Drive

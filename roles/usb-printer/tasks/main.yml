@@ -20,6 +20,7 @@
 - name: Provision Samba config
   blockinfile:
     path: /etc/samba/smb.conf
+    marker: "# {mark} ANSIBLE MANAGED BLOCK (USB-PRINTER)"
     block: |
       [printers]
         comment = All Printers
@@ -37,3 +38,28 @@
         read only = no
         guest ok = no
   notify: Restart Samba
+
+###
+# Manual setup
+###
+
+#
+# Get HP LaserJet P1005 printer firmware
+# sudo getweb P1005
+# Restart Printer
+#
+# go to http://raspberrypi:631/admin
+#
+# Enable: 'Allow users to cancel any job (not just their own)' and save.
+#
+# Plug and switch on the Printer
+# Press 'Add Printer'
+# Select 'HP LaserJet P1005 (HP LaserJet P1005)'
+# 'Continue'
+# Enable 'Share This Printer'
+# 'Continue'
+# Choose default: 'HP LaserJet P1005 Foomatic/foo2xqx'
+# 'Add Printer'
+# 'Set Default Options'
+# 'Print Test Page'
+#
