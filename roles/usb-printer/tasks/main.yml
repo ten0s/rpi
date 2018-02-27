@@ -1,0 +1,39 @@
+---
+- name: Install Printer deps
+  apt: name={{item}}
+       state=present
+  with_items:
+  - cups
+  - foomatic-db
+  - foomatic-db-engine
+
+- name: Provision CUPS config
+  copy: src=cupsd.conf
+        dest=/etc/cups/
+  notify: Restart CUPS
+
+- name: Enable service
+  service: name=cups
+           enabled=true
+           state=started
+
+- name: Provision Samba config
+  blockinfile:
+    path: /etc/samba/smb.conf
+    block: |
+      [printers]
+        comment = All Printers
+        browseable = no
+        path = /var/spool/samba
+        printable = yes
+        guest ok = yes
+        read only = yes
+        create mask = 0700
+
+      [print$]
+        comment = Printer Drivers
+        path = /var/lib/samba/printers
+        browseable = yes
+        read only = no
+        guest ok = no
+  notify: Restart Samba

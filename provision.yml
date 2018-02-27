@@ -8,3 +8,4 @@
   - {role: samba, tags: ["samba"]}
   - {role: transmission, tags: ["transmission"]}
   - {role: usb-drive, tags: ["usb-drive"]}
+  - {role: usb-printer, tags: ["usb-printer"]}
