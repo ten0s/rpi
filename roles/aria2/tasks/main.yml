@@ -7,7 +7,11 @@
   file: path=/media/Transcend/Downloads
         state=directory
 
-- name: Provision config
+- name: Provision config (1/2)
+  file: path=/var/lib/aria2/session
+        state=touch
+
+- name: Provision config (2/2)
   copy: src=aria2.conf
         dest=/etc/aria2/
   notify: Restart Aria2
