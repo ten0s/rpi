@@ -13,6 +13,20 @@
     line: "UUID=620090FE0090DA7D /media/Transcend ntfs-3g auto,nofail,nobootwait,uid=1000,gid=1000,fmask=0111,dmask=0000,utf8,windows_names 0 0"
   notify: Remount Transcend
 
+- name: Provision Samba config
+  blockinfile:
+    path: /etc/samba/smb.conf
+    block: |
+      [Transcend]
+        comment = Transcend USB Drive
+        path = /media/Transcend
+        browseable = yes
+        writeable = yes
+        read only = no
+        guest ok = yes
+  notify: Restart Samba
+
+# UI env only, is not needed on headless server
 - name: Disable LXDE automount
   blockinfile:
     path: /home/pi/.config/pcmanfm/LXDE/pcmanfm.conf

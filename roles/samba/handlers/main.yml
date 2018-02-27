@@ -1,0 +1,6 @@
+---
+- name: Restart Samba
+  service: name={{item}} state=restarted
+  with_items:
+  - smbd
+  - nmbd
