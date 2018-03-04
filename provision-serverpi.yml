@@ -1,11 +1,11 @@
 ---
-- name: Provision RPi env
-  hosts: all
+- name: Provision Server Pi
+  hosts: serverpi
   become: true
   roles:
+  - {role: common, tags: ["common"]}
   - {role: aria2, tags: ["aria2"]}
   - {role: nginx, tags: ["nginx"]}
   - {role: samba, tags: ["samba"]}
   - {role: transmission, tags: ["transmission"]}
   - {role: usb-drive, tags: ["usb-drive"]}
-  - {role: usb-printer, tags: ["usb-printer"]}

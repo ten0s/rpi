@@ -1,4 +1,9 @@
 ---
+- name: Add user to lpadmin groups
+  user: name=pi
+        groups=lpadmin
+        append=yes
+
 - name: Install Printer deps
   apt: name={{item}}
        state=present
@@ -44,22 +49,19 @@
 ###
 
 #
-# Get HP LaserJet P1005 printer firmware
+# 1. Plug and switch on the Printer
+# 2. Get HP LJ P1005 firmware file
 # sudo getweb P1005
-# Restart Printer
-#
-# go to http://raspberrypi:631/admin
-#
-# Enable: 'Allow users to cancel any job (not just their own)' and save.
-#
-# Plug and switch on the Printer
-# Press 'Add Printer'
-# Select 'HP LaserJet P1005 (HP LaserJet P1005)'
-# 'Continue'
-# Enable 'Share This Printer'
-# 'Continue'
-# Choose default: 'HP LaserJet P1005 Foomatic/foo2xqx'
-# 'Add Printer'
-# 'Set Default Options'
-# 'Print Test Page'
+# 3. Restart Printer
+# 4. Go to http://printerpi:631/admin
+# 5. Enable 'Allow users to cancel any job (not just their own)' and save.
+# 6. Press 'Add Printer'
+# 7. Select 'HP LaserJet P1005 (HP LaserJet P1005)'
+# 8. 'Continue'
+# 9. Enable 'Share This Printer'
+# 10. 'Continue'
+# 11. Choose default: 'HP LaserJet P1005 Foomatic/foo2xqx'
+# 12. 'Add Printer'
+# 13. 'Set Default Options'
+# 14. 'Maintenance' -> 'Print Test Page'
 #

@@ -1,2 +1,4 @@
-[rpi]
 raspberrypi ansible_ssh_user=pi ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+mediapi ansible_ssh_user=pi ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+printerpi ansible_ssh_user=pi ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+serverpi ansible_ssh_user=pi ansible_ssh_common_args='-o StrictHostKeyChecking=no'

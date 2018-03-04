@@ -1,0 +1,8 @@
+---
+- name: Provision Printer Pi
+  hosts: printerpi
+  become: true
+  roles:
+  - {role: common, tags: ["common"]}
+  - {role: samba, tags: ["samba"]}
+  - {role: usb-printer, tags: ["usb-printer"]}

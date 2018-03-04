@@ -28,11 +28,11 @@
   notify: Restart Samba
 
 # UI env only, is not needed on headless server
-- name: Disable LXDE automount
-  blockinfile:
-    path: /home/pi/.config/pcmanfm/LXDE/pcmanfm.conf
-    block: |
-      [volume]
-        mount_on_startup=0
-        mount_removable=0
-        autorun=0
+#- name: Disable LXDE automount
+#  blockinfile:
+#    path: /home/pi/.config/pcmanfm/LXDE/pcmanfm.conf
+#    block: |
+#      [volume]
+#        mount_on_startup=0
+#        mount_removable=0
+#        autorun=0

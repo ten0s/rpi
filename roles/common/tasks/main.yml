@@ -1,0 +1,8 @@
+---
+- name: Install common
+  apt: name={{item}}
+       state=present
+  with_items:
+  - emacs
+  - git
+  - mc

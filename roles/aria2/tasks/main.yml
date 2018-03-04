@@ -3,15 +3,22 @@
   apt: name=aria2
        state=present
 
-- name: Ensure dir
+- name: Ensure Downloads dir
   file: path=/media/Transcend/Downloads
         state=directory
 
-- name: Provision config (1/2)
+- name: Provision config (1/3)
+  file: path={{item}}
+        state=directory
+  with_items:
+  - /var/lib/aria2
+  - /etc/aria2
+
+- name: Provision config (2/3)
   file: path=/var/lib/aria2/session
         state=touch
 
-- name: Provision config (2/2)
+- name: Provision config (3/3)
   copy: src=aria2.conf
         dest=/etc/aria2/
   notify: Restart Aria2
