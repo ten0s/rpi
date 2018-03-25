@@ -4,6 +4,7 @@
   become: true
   roles:
   - {role: common, tags: ["common"]}
+  - {role: serverpi, tags: ["serverpi"]}
   - {role: aria2, tags: ["aria2"]}
   - {role: nginx, tags: ["nginx"]}
   - {role: samba, tags: ["samba"]}

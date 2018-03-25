@@ -78,8 +78,9 @@ sudo raspi-config
 ## Provision
 
 ```
-ansible-playbook -i hosts provision-printerpi.yml
+./provision-printerpi.sh
+
 ```
 ```
-ansible-playbook -i hosts provision-serverpi.yml
+./provision-serverpi.sh
 ```
