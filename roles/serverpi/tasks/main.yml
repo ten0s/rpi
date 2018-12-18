@@ -1,8 +1,13 @@
 ---
-- name: Install youtube-dl
-  pip: name=youtube-dl
+- name: Install pip deps
+  pip: name={{item}}
        state=latest
+  with_items:
+  - youtube-dl
 
-- name: Install telnet
-  apt: name=telnet
+- name: Install apt deps
+  apt: name={{item}}
        state=latest
+  with_items:
+  - expect
+  - telnet
