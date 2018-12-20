@@ -1,13 +1,40 @@
 ---
 - name: Install pip deps
   pip: name={{item}}
-       state=latest
+       state=present
   with_items:
+  - virtualenv
   - youtube-dl
 
 - name: Install apt deps
   apt: name={{item}}
-       state=latest
+       state=present
   with_items:
   - expect
+  - jq
   - telnet
+
+- name: LGWebOSRemote 1/3
+  git: repo=https://github.com/klattimer/LGWebOSRemote
+       dest=~/LGWebOSRemote/
+       version=e6614df
+       update=false
+  register: lgtv
+
+- name: LGWebOSRemote 2/3
+  command: ./install.sh chdir=~/LGWebOSRemote/
+  when: lgtv.changed
+
+- name: LGWebOSRemote 3/3
+  command: chmod +x lgtv.sh chdir=~/LGWebOSRemote/
+  when: lgtv.changed
+
+# Pair with TV
+# ~/LGWebOSRemote/lgtv.sh auth <IP>
+
+- name: Notify TV Cron Job 1/2
+  cron:
+    name: "Notify TV"
+    minute: "30"
+    hour: "21"
+    job: "~/LGWebOSRemote/lgtv.sh notification 'Server connection NOT in 15 mins'"
