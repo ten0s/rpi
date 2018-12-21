@@ -34,14 +34,14 @@
 
 - name: Notify TV Cron Job 1/3
   cron:
-    name: "Notify TV"
-    minute: "30"
+    name: "Notify TV 15"
+    minute: "15"
     hour: "21"
     job: "~/LGWebOSRemote/lgtv.sh notification 'Network is going down in 15 mins'"
 
 - name: Notify TV Cron Job 2/3
   cron:
-    name: "Notify TV"
+    name: "Notify TV 5"
     minute: "25"
     hour: "21"
     job: "~/LGWebOSRemote/lgtv.sh notification 'Network is going down in 5 mins'"
@@ -51,4 +51,4 @@
     name: "Notify TV"
     minute: "29"
     hour: "21"
-    job: "~/LGWebOSRemote/lgtv.sh notification 'Network is going down...'"
+    job: "~/LGWebOSRemote/lgtv.sh notification 'Network is going down now'"
