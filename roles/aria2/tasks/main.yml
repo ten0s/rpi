@@ -23,9 +23,15 @@
         dest=/etc/aria2/
   notify: Restart Aria2
 
-- name: Clone WebUI
+- name: Setup WebUI (1/2)
   git: repo=https://github.com/ziahamza/webui-aria2.git
        dest=/var/www/aria2
+       version=fb9d758
+
+- name: Setup WebUI (1/2)
+  file: src=/var/www/aria2/docs
+        dest=/var/www/aria2/aria2
+        state=link
 
 - name: Provision nginx
   copy: src=webui-aria2.conf
