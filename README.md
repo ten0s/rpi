@@ -78,9 +78,9 @@ sudo raspi-config
 ## Provision
 
 ```
-./provision-printerpi.sh
+./provision-printerpi.sh [--tags ...]
 
 ```
 ```
-./provision-serverpi.sh
+./provision-serverpi.sh [--tags ...]
 ```
