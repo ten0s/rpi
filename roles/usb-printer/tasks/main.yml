@@ -1,23 +1,30 @@
 ---
-- name: Add user to lpadmin groups
-  user: name=pi
-        groups=lpadmin
-        append=yes
+- name: Ensure lpadmin group
+  group:
+    name: lpadmin
+    state: present
 
-- name: Install Printer deps
-  apt: name={{item}}
-       state=present
-  with_items:
-  - cups
-  - foomatic-db
-  - foomatic-db-engine
+- name: Add user to lpadmin group
+  user:
+    name: pi
+    groups:
+    - lpadmin
+    append: yes
+
+- name: Install deps
+  apt:
+    name:
+    - cups
+    - foomatic-db
+    - foomatic-db-engine
+    state: present
 
 - name: Provision CUPS config
   copy: src=cupsd.conf
         dest=/etc/cups/
   notify: Restart CUPS
 
-- name: Enable service
+- name: Enable CUPS service
   service: name=cups
            enabled=true
            state=started
@@ -35,13 +42,6 @@
         guest ok = yes
         read only = yes
         create mask = 0700
-
-      [print$]
-        comment = Printer Drivers
-        path = /var/lib/samba/printers
-        browseable = yes
-        read only = no
-        guest ok = no
   notify: Restart Samba
 
 ###
@@ -50,17 +50,22 @@
 
 #
 # 1. Plug and switch on the Printer
-# 2. Get HP LJ P1005 firmware file
+# 2. Get HP LaserJet 1000 | P1005 firmware file(s)
+# sudo getweb 1000
 # sudo getweb P1005
 # 3. Restart Printer
 # 4. Go to http://printerpi:631/admin
 # 5. Enable 'Allow users to cancel any job (not just their own)' and save.
 # 6. Press 'Add Printer'
-# 7. Select 'HP LaserJet P1005 (HP LaserJet P1005)'
+# 7. Select Local Printers
+# HP LaserJet 1000 (HP LaserJet 1000)
+# HP LaserJet P1005 (HP LaserJet P1005)
 # 8. 'Continue'
 # 9. Enable 'Share This Printer'
 # 10. 'Continue'
-# 11. Choose default: 'HP LaserJet P1005 Foomatic/foo2xqx'
+# 11. Choose recommended
+# HP LaserJet 1000 Foomatic/foo2xqx
+# HP LaserJet P1005 Foomatic/foo2xqx
 # 12. 'Add Printer'
 # 13. 'Set Default Options'
 # 14. 'Maintenance' -> 'Print Test Page'

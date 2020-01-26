@@ -1,9 +1,10 @@
 ## Prepare Raspberry Pi
+https://www.raspberrypi.org/documentation/installation/installing-images/linux.md
 
-1. Download RASPBIAN STRETCH LITE image from https://www.raspberrypi.org/downloads/raspbian/
+1. Download latest lite image from https://www.raspberrypi.org/downloads/raspbian/
 2. Unzip image
 ```
-unzip 2017-11-29-raspbian-stretch-lite.zip
+unzip 2019-09-26-raspbian-buster-lite.zip
 ```
 3. Insert SD card into card reader
 4. Determine SD card device name
@@ -13,49 +14,60 @@ sudo fdisk -l
 Disk /dev/mmcblk0: 31.3 GB
 ...
 ```
-5. Copy image to SD card
+5. Un-mount SD card (optional)
 ```
-sudo dd if=2017-11-29-raspbian-stretch-lite.img of=/dev/mmcblk0 bs=4M conv=fsync
+sudo umount /dev/mmcblk0
 ```
-6. Determine SD card boot partition name
+6. Copy image to SD card
+```
+sudo dd if=2019-09-26-raspbian-buster-lite.img of=/dev/mmcblk0 bs=4M status=progress conv=fsync
+```
+7. Determine SD card partition names
 ```
 sudo fdisk -l
 ...
 Disk /dev/mmcblk0: 31.3 GB
 ...
-   Device Boot      Start         End      Blocks   Id  System
-/dev/mmcblk0p1       8192       93236      42522+    c  W95 FAT32 (LBA)
+Device         Boot  Start     End Sectors  Size Id Type
+/dev/mmcblk0p1        8192  532479  524288  256M  c W95 FAT32 (LBA)
+/dev/mmcblk0p2      532480 4390911 3858432  1.9G 83 Linux
 ...
 ```
-5. Mount SD card boot partition
+8. Mount SD card boot partition
 ```
-sudo mount -t vfat /dev/mmcblk0p1 /mnt
+sudo mkdir -p /mnt/boot
+sudo mount -t vfat /dev/mmcblk0p1 /mnt/boot
 ```
-6. Enable SSH
+9. Enable SSH
 ```
-sudo touch /mnt/ssh
+sudo touch /mnt/boot/ssh
 ```
-7. Enable WIFI (optional)
+10. Enable WIFI (optional)
 ```
-sudo cat >/etc/wpa_supplicant/wpa_supplicant.conf <<EOF
+sudo tee /mnt/boot/wpa_supplicant.conf << EOF
+country=US
+ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
 update_config=1
 network={
-    ssid="SSID"
-    psk="SECRET"
+    ssid="<SSID>"
+    psk="<SECRET>"
+    scan_ssid=1
+    key_mgmt=WPA-PSK
 }
 EOF
 ```
-8. Un-mount SD card boot partition
+11. Un-mount SD card boot partition
 ```
-sudo umount /mnt
+sudo umount /mnt/boot
 ```
-9. Insert SD card into Raspberry PI
-10. Plug-in LAN cable and power supply.
-11. SSH to device
+12. Remove SD card from card reader
+13. Insert SD card into Raspberry PI
+14. Plug-in LAN cable and power supply.
+15. SSH to device
 ```
 ssh pi@raspberrypi
 ```
-12. Copy SSH public key to device
+16. Copy SSH public key to device
 ```
 ssh-copy-id pi@raspberrypi
 ```
@@ -63,7 +75,7 @@ OR
 ```
 ssh pi@raspberrypi 'cat >> ~/.ssh/authorized_keys' < ~/.ssh/id_rsa.pub
 ```
-12. Configure
+17. Configure
 ```
 sudo raspi-config
 ```
@@ -73,7 +85,7 @@ sudo raspi-config
 * Localisation Options
   * I1 Change Locale: en_US.UTF-8 UTF-8
   * I2 Change Timezone (/etc/localtime)
-13. Reboot
+18. Reboot
 
 ## Provision
 

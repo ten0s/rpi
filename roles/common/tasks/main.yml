@@ -1,9 +1,7 @@
 ---
-- name: Install common
-  apt: name={{item}}
-       state=present
-  with_items:
-  - emacs
-  - git
-  - mc
-  - python-pip
+- name: Install deps
+  apt:
+    name:
+    - htop
+    - mc
+    state: present
