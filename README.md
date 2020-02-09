@@ -72,7 +72,7 @@ EOF
 $ sudo umount /mnt/boot
 ```
 13. Remove SD card from card reader
-14. Insert SD card into Raspberry PI
+14. Insert SD card into Raspberry Pi
 15. Plug-in LAN cable (or use WIFI) and power supply.
 16. After a couple of minutes you should be able to ping
 ```
