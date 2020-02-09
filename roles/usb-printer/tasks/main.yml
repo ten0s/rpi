@@ -52,7 +52,7 @@
 # 1. Plug and switch on the Printer
 # 2. Get HP LaserJet 1000 | P1005 firmware file(s)
 # sudo getweb 1000
-# sudo getweb P1005
+# sudo getweb p1005
 # 3. Restart Printer
 # 4. Go to http://printerpi:631/admin
 # 5. Enable 'Allow users to cancel any job (not just their own)' and save.
