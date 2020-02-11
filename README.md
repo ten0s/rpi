@@ -100,9 +100,9 @@ PING raspberrypi (192.168.100.33) 56(84) bytes of data.
 $ ssh-keygen -t rsa -N "" -f ~/.ssh/id_rsa
 ```
 
-* Copy your SSH public key. Default password for the user pi is raspberry
+* Copy your SSH public key. Default password for the user pi is **raspberry**
 ```
-$ ssh -F /dev/null pi@raspberrypi 'mkdir -p ~/.ssh/; cat >> ~/.ssh/authorized_keys' < ~/.ssh/id_rsa.pub
+$ ssh -F /dev/null pi@raspberrypi -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null 'mkdir -p ~/.ssh/; cat >> ~/.ssh/authorized_keys' < ~/.ssh/id_rsa.pub
 ```
 
 * Now you should be able to SSH without password
