@@ -1,0 +1,12 @@
+---
+# Android USB tethering static IP
+- name: Provision Dhcpcd config
+  blockinfile:
+    path: /etc/dhcpcd.conf
+    marker: "# {mark} ANSIBLE MANAGED BLOCK (USB-STATIC-IP)"
+    block: |
+      interface usb0
+      static ip_address=192.168.42.42/24
+      static routers=192.168.42.129
+      static domain_name_servers=192.168.42.129
+  notify: Restart Dhcpcd

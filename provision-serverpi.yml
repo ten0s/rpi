@@ -10,3 +10,4 @@
   - {role: samba, tags: ["samba"]}
   - {role: transmission, tags: ["transmission"]}
   - {role: usb-drive, tags: ["usb-drive"]}
+  - {role: usb-static-ip, tags: ["usb-static-ip"]}
