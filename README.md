@@ -1,4 +1,4 @@
-## [Setup Raspbian OS on SD card](https://www.raspberrypi.org/documentation/installation/installing-images/linux.md)
+## [Setup Raspbian on SD card](https://www.raspberrypi.org/documentation/installation/installing-images/linux.md)
 
 * Download the latest image from [https://www.raspberrypi.org/downloads/raspbian/](https://www.raspberrypi.org/downloads/raspbian/)
 ```
