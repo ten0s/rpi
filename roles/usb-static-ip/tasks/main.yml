@@ -1,5 +1,5 @@
 ---
-# Android USB tethering static IP
+# http://ten0s.github.io/blog/2020/02/22/raspberrypi-static-ip-address-for-android-usb-tethering
 - name: Provision Dhcpcd config
   blockinfile:
     path: /etc/dhcpcd.conf
