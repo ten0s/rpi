@@ -1,0 +1,15 @@
+---
+- name: Install KODI
+  apt:
+    name:
+    - kodi
+    state: present
+
+- name: Autostart KODI
+  lineinfile:
+    path: /home/pi/.config/lxsession/LXDE/autostart
+    line: "@kodi"
+
+- name: Provision KODI
+  copy: src=remote.xml
+        dest=/home/pi/.kodi/userdata/keymaps/

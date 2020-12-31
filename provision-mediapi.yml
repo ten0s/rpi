@@ -1,0 +1,9 @@
+---
+- name: Provision Media Pi
+  hosts: mediapi
+  become: true
+  roles:
+  - {role: common, tags: ["common"]}
+  - {role: lxde, tags: ["lxde"]}
+  - {role: kodi, tags: ["kodi"]}
+  - {role: usb-static-ip, tags: ["usb-static-ip"]}

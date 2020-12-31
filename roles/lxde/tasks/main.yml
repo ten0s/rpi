@@ -1,0 +1,35 @@
+---
+- name: Install X11 deps
+  apt:
+    name:
+    - xinit
+    - xserver-xorg
+    - xserver-xorg-video-fbdev
+    state: present
+
+- name: Install LXDE
+  apt:
+    name:
+    - lxde
+    - lxde-common
+    state: present
+
+# UI env only, is not needed on headless server
+#- name: Disable LXDE automount
+#  blockinfile:
+#    path: /home/pi/.config/pcmanfm/LXDE/pcmanfm.conf
+#    block: |
+#      [volume]
+#        mount_on_startup=0
+#        mount_removable=0
+#        autorun=0
+
+- name: Install LightDM
+  apt:
+    name:
+    - lightdm
+    state: present
+
+- name: Provision LightDM
+  copy: src=lightdm.conf
+        dest=/etc/lightdm/

@@ -1,0 +1,10 @@
+<keymap>
+  <global>
+    <remote>
+      <red>ActivateWindow(Home)</red>
+      <green></green>
+      <yellow></yellow>
+      <blue>ContextMenu</blue>
+    </remote>
+  </global>
+</keymap>
