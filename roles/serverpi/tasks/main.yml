@@ -21,6 +21,17 @@
     - telnet
     state: latest
 
+- name: Provision Dhcpcd config (Static IP)
+  blockinfile:
+    path: /etc/dhcpcd.conf
+    marker: "# {mark} ANSIBLE MANAGED BLOCK (STATIC-IP)"
+    block: |
+      interface eth0
+      static ip_address=192.168.100.3/24
+      static routers=192.168.100.1
+      static domain_name_servers=127.0.0.1 192.168.100.1
+  notify: Restart Dhcpcd
+
 - name: LGWebOSRemote 1/3
   git: repo=https://github.com/klattimer/LGWebOSRemote
        dest=~/LGWebOSRemote/
