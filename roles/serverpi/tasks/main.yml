@@ -3,15 +3,15 @@
   apt:
     name:
     - git
-    - python-pip
+    #- python-pip
     state: latest
 
-- name: Install pip deps
-  pip:
-    name:
-    - virtualenv
-    - youtube-dl
-    state: latest
+#- name: Install pip deps
+#  pip:
+#    name:
+#    - virtualenv
+#    - youtube-dl
+#    state: latest
 
 - name: Install apt deps
   apt:
