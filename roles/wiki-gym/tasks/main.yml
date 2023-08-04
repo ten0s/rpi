@@ -1,0 +1,16 @@
+---
+- name: Create wiki-gym mount point
+  file: path=/var/www/wiki-gym
+        state=directory
+
+# sudo mount --bind /media/Transcend/Public/wiki-gym /var/www/wiki-gym
+- name: Provision /etc/fstab
+  lineinfile:
+    path: /etc/fstab
+    line: "/media/Transcend/Public/wiki-gym /var/www/wiki-gym none bind"
+  notify: Remount wiki-gym
+
+- name: Provision nginx
+  copy: src=wiki-gym.conf
+        dest=/etc/nginx/conf.d/server.d/
+  notify: Restart Nginx
