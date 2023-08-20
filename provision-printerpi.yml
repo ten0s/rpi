@@ -4,6 +4,7 @@
   become: true
   roles:
   - {role: common, tags: ["common"]}
+  - {role: printerpi, tags: ["printerpi"]}
   - {role: samba, tags: ["samba"]}
   - {role: usb-printer, tags: ["usb-printer"]}
-  - {role: usb-static-ip, tags: ["usb-static-ip"]}
+#  - {role: usb-static-ip, tags: ["usb-static-ip"]}

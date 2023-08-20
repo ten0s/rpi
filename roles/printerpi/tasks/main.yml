@@ -1,0 +1,11 @@
+---
+- name: Provision Dhcpcd config (Static IP)
+  blockinfile:
+    path: /etc/dhcpcd.conf
+    marker: "# {mark} ANSIBLE MANAGED BLOCK (STATIC-IP)"
+    block: |
+      interface eth0
+      static ip_address=192.168.100.4/24
+      static routers=192.168.100.1
+      static domain_name_servers=127.0.0.1 8.8.8.8 8.8.4.4
+  notify: Restart Dhcpcd
