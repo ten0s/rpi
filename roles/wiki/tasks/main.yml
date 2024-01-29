@@ -1,0 +1,16 @@
+---
+- name: Create wiki mount point
+  file: path=/var/www/wiki
+        state=directory
+
+# sudo mount --bind /media/Transcend/Public/wiki /var/www/wiki
+- name: Provision /etc/fstab
+  lineinfile:
+    path: /etc/fstab
+    line: "/media/Transcend/Public/wiki /var/www/wiki none bind"
+  notify: Remount wiki
+
+- name: Provision nginx
+  copy: src=wiki.conf
+        dest=/etc/nginx/conf.d/server.d/
+  notify: Restart Nginx

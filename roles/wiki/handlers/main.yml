@@ -1,0 +1,3 @@
+---
+- name: Remount wiki
+  shell: umount /var/www/wiki && mount /var/www/wiki

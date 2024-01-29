@@ -8,6 +8,7 @@
   - {role: aria2, tags: ["aria2"]}
   - {role: nginx, tags: ["nginx"]}
   - {role: wiki-gym, tags: ["wiki-gym"]}
+  - {role: wiki, tags: ["wiki"]}
   - {role: samba, tags: ["samba"]}
   - {role: transmission, tags: ["transmission"]}
   - {role: usb-drive, tags: ["usb-drive"]}
